@@ -1,0 +1,19 @@
+#Specify a base image
+FROM node:alpine
+
+#Specify a working directory
+WORKDIR /usr/src/api
+
+#Copy the dependencies file
+COPY ./api/package*.json ./
+
+#Install dependencies
+RUN npm install 
+
+#Copy remaining files
+COPY /api/src ./src
+COPY /api/server.js ./server.js
+
+#Default command
+EXPOSE 3000
+CMD ["npm","start"]

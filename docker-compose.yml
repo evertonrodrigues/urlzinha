@@ -1,0 +1,21 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
+  api:
+    build: 
+      context: ./      
+      dockerfile: Dockerfile-Api
+    image: urlzinha-api
+    depends_on:
+      - redis
+    ports:
+      - 3000:3000
+    environment:
+      - REDIS_URL=redis://cache
+      - SERVER_PORT=3000
+    command:
+      sh -c 'npm i && node server.js'

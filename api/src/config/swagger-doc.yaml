@@ -1,0 +1,47 @@
+paths:
+  /shorten:
+    post:
+      tags:
+        - Url
+      name: Shorten url
+      summary: Shorten url
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              original:
+                type: string
+              customShortenedUrl:
+                type: string
+          required:
+            - original
+      responses:
+        200:
+          description: "Successful operation"
+        422:
+          description: "This custom URL is not available"
+  /{url}:
+    get:
+      tags:
+        - Url
+      name: Redirect to original shortened url
+      summary: Redirect to original shortened url
+      parameters:
+        - name: url
+          in: path
+          description: "Url id for original"
+          required: true
+          type: string
+      responses:
+        302:
+          description: "Redirection reponse"
+        404:
+          description: "No url found"
+        500:
+          description: "Internal server error"
