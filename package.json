@@ -1,0 +1,21 @@
+{
+  "name": "urlzinha",
+  "author": "Everton Rodrigues",
+  "version": "1.0.0",
+  "scripts": {
+    "zip": "node scripts/zip",
+    "api": "cd ./api && npm start",
+    "web": "cd ./web && npm run serve",
+    "dev": "./node_modules/.bin/concurrently --kill-others \"npm run api\" \"npm run web\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evertonrodrigues/urlzinha.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/evertonrodrigues/urlzinha#readme",
+  "devDependencies": {
+    "bestzip": "^2.1.4",
+    "concurrently": "^5.0.0"
+  }
+}

@@ -1,0 +1,67 @@
+swagger: "2.0"
+info:
+  description: "This is Urlzinha, a api to shorten urls. Urlzinha in portuguese mean's something like 'small url'"
+  version: "1.0.0"
+  title: "Urlzinha"
+  contact:
+    email: "everttonrodrigues@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+tags:
+- name: "url"
+  description: "Everything about your Urls"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "http"
+paths:
+  /shorten:
+    post:
+      tags:
+      - "Url"
+      summary: "Shorten url"
+      description: "Shorten url"
+      operationId: "shortenUrl"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "A Url object thats have a original url and a optinal custom shortened url"
+        schema:
+          type: "object"
+          properties:
+            original:
+              type: "string"
+            customShortenedUrl:
+              type: "string"
+          required:
+            - original
+      responses:
+        200:
+          description: "Successful operation"
+        422:
+          description: "This custom URL is not available"
+  /{url}:
+    get:
+      tags:
+        - "Url"
+      summary: "Redirect to original shortened url"
+      description: "Redirect to original shortened url"
+      parameters:
+        - name: url
+          in: path
+          description: "Url id for original"
+          required: true
+          type: string
+      responses:
+        302:
+          description: "Redirection reponse"
+        404:
+          description: "No url found"
+        500:
+          description: "Internal server error"

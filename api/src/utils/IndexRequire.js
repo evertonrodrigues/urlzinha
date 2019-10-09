@@ -7,9 +7,6 @@ module.exports = (dirname, arg) => {
     files.forEach(file => {
         if (file !== 'index.js') {            
             const Dependency = require(path.join(dirname,file));
-            if(Dependency instanceof UrlShorten){
-                Dependency(arg);
-            }
             new Dependency(arg);
         }
     });

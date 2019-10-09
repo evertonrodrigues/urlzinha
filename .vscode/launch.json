@@ -7,9 +7,16 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Api",
+            "cwd": "${workspaceFolder}/api",
             "program": "${workspaceFolder}/api/server.js",
-            "envFile": "${workspaceFolder}/api/.env"
-        }
+            "envFile": "${workspaceFolder}/api/.env",           
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Zip",            
+            "program": "${workspaceFolder}/scripts/zip.js",
+        }        
     ]
 }

@@ -1,0 +1,21 @@
+#Specify a base image
+FROM node:alpine as build-stage
+
+#Specify a working directory
+WORKDIR /usr/src/web
+
+#Copy the dependencies file
+COPY ./web/package*.json ./
+
+#Install dependencies
+RUN npm install 
+
+#Copy remaining files
+COPY /web/ .
+RUN npm run build
+
+# production stage
+FROM nginx:1.13.12-alpine as production-stage
+COPY --from=build-stage /web/dist /usr/share/nginx/html
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
