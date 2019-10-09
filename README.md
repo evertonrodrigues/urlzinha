@@ -1,10 +1,39 @@
 # Urlzinha
   This is Urlzinha, a api and web service to shorten urls. Urlzinha in portuguese mean's something like 'small url'
 
+## Architecture of the solution
+
+The solution is composed by a Web Application created using [Vue Js](https://vuejs.org) and a Web Service Application created using [Express](https://vuejs.org)
+
+### C4 Model Container Diagram
+![Container Diagram](c4-model-container.png)
+
+
+## Setup
+
+1. Node/NPM approach:
+
+    #### Dependencies:
+    - NodeJS
+    - Npm    
+    
+    Uses `npm install` to install web app and api, then run `npm start`. This approach will use a redis instance that is available  on [RedisLabs](https://vuejs.org) configurad by default. Web app on the port: 8080 and Api on 3000
+
+2. Docker approach:
+
+    #### Dependencies:
+    - Docker 
+
+    Run `docker-compose up` to build, run and let available the Web app on the port 8080 and Api on 3000 and behind the scene a Redis instance. 
+
+## Usage
+
+//TODO
+
 
 ## Help
 ### Docker commands
-```
+```sh
 docker build -f Dockerfile-Api -t urlzinha-api .
 docker image rm urlzinha-api
 
