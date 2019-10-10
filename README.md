@@ -17,14 +17,14 @@ The solution is composed by a Web Application created using [Vue Js](https://vue
     - NodeJS
     - Npm    
     
-    Uses `npm install` to install web app and api, then run `npm start`. This approach will use a redis instance that is available  on [RedisLabs](https://vuejs.org) configurad by default. Web app on the port: 8080 and Api on 3000
+    Uses `npm install` to install web app and api, then run `npm start`. This approach will use a mongo instance that is available on [MLab](https://mlab.com) configurad by default. Web app on the port: 8080 and Api on 3000
 
 2. Docker approach:
 
     #### Dependencies:
     - Docker 
 
-    Run `docker-compose up` to build, run and let available the Web app on the port 8080 and Api on 3000 and behind the scene a Redis instance. 
+    Run `docker-compose up` to build, run and let available the Web app on the port 8080 and Api on 3000 and behind the scene a Mongo instance. 
 
 ## Usage
 
