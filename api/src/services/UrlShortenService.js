@@ -2,7 +2,7 @@ const shortid = require("shortid");
 const UnavailiableCustomUrlError = require("./UrlShortenException");
 const UrlModel = require('../models/Url');
 
-class UrlShorten {
+class UrlShortenService {
 
   _isUrlValid(url) {
     if (!url) return false;
@@ -52,4 +52,4 @@ class UrlShorten {
   }
 }
 
-module.exports = UrlShorten;
+module.exports = UrlShortenService;

@@ -3,11 +3,10 @@
 
 ## Architecture of the solution
 
-The solution is composed by a Web Application created using [Vue Js](https://vuejs.org) and a Web Service Application created using [Express](https://vuejs.org)
+The solution is composed by a Web Application created using [Vue Js](https://vuejs.org) and a Web Service Application created using [Express](https://expressjs.com)
 
 ### C4 Model Container Diagram
 ![Container Diagram](c4-model-container.png)
-
 
 ## Setup
 
