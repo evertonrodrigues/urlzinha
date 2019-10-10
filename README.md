@@ -28,7 +28,9 @@ The solution is composed by a Web Application created using [Vue Js](https://vue
 
 ## Usage
 
-//TODO
+1. Use [web application](http://localhost:8080) 
+
+2. Use [Swagger](http://localhost:3000/api-docs) docs to try out or as a reference to implement the consumers of the API
 
 
 ## Help
@@ -39,10 +41,10 @@ docker image rm urlzinha-api
 
 docker run -p 3000:8080 -d urlzinha-api
 
-docker build -f Dockerfile-Web -t urlzinha-web .
+docker build --build-arg VUE_APP_API_URL=http://localhost:3000 -f Dockerfile-Web -t urlzinha-web .
 docker image rm urlzinha-web
 
-docker run -p 3000:8080 -d urlzinha-web
+docker run -it -p 8080:80 --rm --name urlzinha-web-1 urlzinha-web
 
 docker container stop <container id>  
 docker container rm <container id>

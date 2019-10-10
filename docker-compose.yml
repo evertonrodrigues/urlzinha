@@ -19,3 +19,15 @@ services:
       - SERVER_PORT=3000
     command:
       sh -c 'npm i && node server.js'
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile-Web
+      args:
+        VUE_APP_API_URL : http://localhost:3000
+    image: urlzinha-web
+    depends_on:
+      - api
+    ports:
+      - 8080:80
+    

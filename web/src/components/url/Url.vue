@@ -24,7 +24,7 @@ export default {
   name: "Url",
   data: () => ({
     form: {
-      original: "http://g1.com.br",
+      original: "http://google.com",
       customShortenedUrl: null
     }
   }),

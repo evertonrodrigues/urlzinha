@@ -11,8 +11,7 @@ COPY ./api/package*.json ./
 RUN npm install 
 
 #Copy remaining files
-COPY /api/src ./src
-COPY /api/server.js ./server.js
+COPY /api ./
 
 #Default command
 EXPOSE 3000

@@ -20,6 +20,7 @@ zip({
     "**/package*.json",
     "**/.gitiginore",
     "**/README.md",
+    "c4-model-container.png",
     "api/src",
     "api/.env",
     "api/server.js",

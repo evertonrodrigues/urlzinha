@@ -16,18 +16,16 @@ export default new Vuex.Store({
   actions: {
     async shorten({ commit }, { url }) {
       try {
-        console.log(url);
-        console.log(`${process.env.VUE_APP_SERVER_URL}/shorten`);
         const res = await axios.post(
-          `${process.env.VUE_APP_SERVER_URL}/shorten`,
+          `${process.env.VUE_APP_API_URL}/shorten`,
           url
         );
         commit(
           "setUrl",
-          `${process.env.VUE_APP_SERVER_URL}/${res.data.shortened}`
+          `${process.env.VUE_APP_API_URL}/${res.data.shortened}`
         );
       } catch (err) {
-        alert(err);
+        alert(err.response.data);
       }
     }
   }

@@ -1,3 +1,4 @@
+const Url = require('url');    
 const UrlShorten = require("../services/UrlShorten");
 const UnavailiableCustomUrlError = require("../services/UrlShortenException");
 
@@ -16,7 +17,7 @@ class UrlShortenRouter {
         if (error instanceof UnavailiableCustomUrlError) {
           res.status(422).send(error.message);
         } else {
-          res.status(error.status).send(error.msg);
+          res.status(400).send(error.message);
         }
       }
     });
@@ -25,12 +26,12 @@ class UrlShortenRouter {
       try {
         const url = await this.urlShorten.findUrl(req.params.url);
         if (url) {
-          res.redirect(url.original);
+          res.redirect(301, url.original);          
         } else {
           res.status(404).send("No url found");
         }
       } catch (error) {
-        res.status(500).send(error.msg);
+        res.status(500).send(error.message);
       }
     });
   }
