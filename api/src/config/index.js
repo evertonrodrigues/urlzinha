@@ -8,5 +8,8 @@ module.exports = {
     redis: {
         url: process.env.REDIS_URL || 'redis-18497.c85.us-east-1-2.ec2.cloud.redislabs.com:18497',
         password: process.env.REDIS_PASSWORD || 'R!123qwedis!'
+    },
+    mongo: {
+        url : process.env.MONGO_URL || 'mongodb://admin:urlzinha123@ds333238.mlab.com:33238/urlzinha',        
     }
 }

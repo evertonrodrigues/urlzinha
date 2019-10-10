@@ -1,21 +1,21 @@
 version: '3'
 services:
-  redis:
-    image: redis
-    container_name: cache
-    expose:
-      - 6379
+  mongo:
+    image: mongo
+    container_name: mongo    
+    ports:
+      - "27017:27017"
   api:
     build: 
       context: ./      
       dockerfile: Dockerfile-Api
     image: urlzinha-api
     depends_on:
-      - redis
+      - mongo
     ports:
       - 3000:3000
     environment:
-      - REDIS_URL=redis://cache
+      - MONGO_URL=mongo://mongo
       - SERVER_PORT=3000
     command:
       sh -c 'npm i && node server.js'
