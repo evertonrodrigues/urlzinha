@@ -1,14 +1,14 @@
-const UrlShorten = require("../services/UrlShorten");
+const UrlShorten = require("../services/UrlShortenService");
 const UnavailiableCustomUrlError = require("../services/UrlShortenException");
 
 class UrlShortenRouter {
   constructor(app) {
     this.urlShorten = new UrlShorten();
-    this.init(app);
+    this.app = app;    
   }
 
-  init(app) {
-    app.post("/shorten", async (req, res) => {
+  init() {
+    this.app.post("/shorten", async (req, res) => {
       try {
         const url = await this.urlShorten.shorten(req.body);
         res.status(200).json(url);
@@ -21,7 +21,7 @@ class UrlShortenRouter {
       }
     });
 
-    app.get("/:url", async (req, res) => {
+    this.app.get("/:url", async (req, res) => {
       try {
         const url = await this.urlShorten.findUrl(req.params.url);
         if (url) {

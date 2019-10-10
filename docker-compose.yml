@@ -11,14 +11,14 @@ services:
       dockerfile: Dockerfile-Api
     image: urlzinha-api
     depends_on:
-      - mongo
+      - mongo      
     ports:
       - 3000:3000
     environment:
-      - MONGO_URL=mongo://mongo
+      - MONGO_URL=mongodb://mongo/urlzinha
       - SERVER_PORT=3000
     command:
-      sh -c 'npm i && node server.js'
+      sh -c 'npm i && npm start'
   web:
     build:
       context: ./
