@@ -1,4 +1,3 @@
-const Url = require('url');    
 const UrlShorten = require("../services/UrlShorten");
 const UnavailiableCustomUrlError = require("../services/UrlShortenException");
 

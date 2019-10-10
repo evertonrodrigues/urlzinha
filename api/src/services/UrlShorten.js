@@ -1,47 +1,55 @@
 const shortid = require("shortid");
 const UnavailiableCustomUrlError = require("./UrlShortenException");
-const RedisClient = require("./RedisClient");
+const UrlModel = require('../models/Url');
 
 class UrlShorten {
-  constructor(urlRepository = new RedisClient()) {
-    this.urlRepository = urlRepository;
-  }
 
-  isUrlValid(url) {
+  _isUrlValid(url) {
+    if (!url) return false;
     const result = url.match(
       /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
     );
     return result == null ? false : true;
   }
 
+  _getFormatedUrl({ original, shortened }) {
+    return {
+      original: original.startsWith("www")
+        ? `http://${original}` : original,
+      shortened: shortened
+    }
+  }
+
   async shorten(url) {
-    // if (!validUrl.isUri(url.original)) {
-    if (!this.isUrlValid(url.original)) {
+    if (!this._isUrlValid(url.original)) {
       throw new Error("Invalid Url.");
     }
-    const shortenedUrl =
-      url.customShortenedUrl != undefined && url.customShortenedUrl != null
-        ? url.customShortenedUrl
-        : shortid.generate();
-    if ((await this.findUrl(shortenedUrl)) != null) {
-      throw new UnavailiableCustomUrlError();
+    let urlDto = { original: url.original, shortened: url.customShortenedUrl }
+    if (url.customShortenedUrl) {
+      let urlModel = await UrlModel.findOne({ shortened: urlDto.shortened });
+      if (!urlModel) {
+        await UrlModel.create(urlDto);
+      } else {
+        if (urlModel.original != url.original) {
+          throw new UnavailiableCustomUrlError();
+        }
+      }
+    } else {
+      let urlModel = await UrlModel.findOne({ original: urlDto.original });
+      if (!urlModel) {
+        urlDto.shortened = shortid.generate();
+        await UrlModel.create(urlDto);
+      } else {
+        urlDto = urlModel;
+      }
     }
-    const urlModel = {
-      original: url.original.startsWith("www")
-        ? `http://${url.original}`
-        : url.original,
-      shortened: shortenedUrl
-    };
-    await this.urlRepository.setAsync(
-      urlModel.shortened,
-      JSON.stringify(urlModel)
-    );
-    return urlModel;
+    return this._getFormatedUrl(urlDto);
   }
 
   async findUrl(shortenedUrl) {
-    const value = await this.urlRepository.getAsync(shortenedUrl);
-    return value ? JSON.parse(value) : null;
+    let urlModel = await UrlModel.findOne({ shortened: shortenedUrl });
+    return urlModel ? this._getFormatedUrl(urlModel) : null;
   }
 }
+
 module.exports = UrlShorten;
