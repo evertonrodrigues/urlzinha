@@ -18,7 +18,7 @@
   "license": "MIT",
   "homepage": "https://github.com/evertonrodrigues/urlzinha#readme",
   "devDependencies": {
-    "bestzip": "^2.1.4",
+    "bestzip": "^2.1.7",
     "concurrently": "^5.0.0"
   }
 }
